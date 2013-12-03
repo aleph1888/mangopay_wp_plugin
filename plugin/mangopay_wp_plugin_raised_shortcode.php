@@ -23,7 +23,7 @@ function mwp_show_raised( $atts ) {
 	//Search for wallet
 	$wallet_id = get_post_meta($post-> ID, "wallet_id", 1);
 	if ($wallet_id) {
-		require_once (dirname(__FILE__) . "mangopay/lib/common.inc");
+		require_once (dirname(__FILE__) . "/mangopay/lib/common.inc");
 		$wallet = request("wallets/$wallet_id", "GET");
 	}
 

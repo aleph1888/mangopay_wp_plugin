@@ -16,7 +16,7 @@ $can_perform_action = $can_perform_action && $beneficiary_id && $wallet_id;
 
 //Get amount
 $wallet_id = get_post_meta($post_id, "wallet_id", 1);
-require_once (dirname(__FILE__) . "mangopay/lib/common.inc");
+require_once (dirname(__FILE__) . "/lib/common.inc");
 $wallet = request("wallets/$wallet_id", "GET");
 $can_perform_action = $can_perform_action && ($wallet && $wallet -> Amount > 0);
 
