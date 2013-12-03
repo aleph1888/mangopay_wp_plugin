@@ -1,0 +1,90 @@
+# Copyright (C) 2013 WordPress
+# This file is distributed under the same license as the WordPress package.
+msgid ""
+msgstr ""
+"Project-Id-Version: mangopay_wp_plugin 0.1\n"
+"Report-Msgid-Bugs-To: http://wppolyglots.wordpress.com\n"
+"POT-Creation-Date: 2013-11-28 06:13:05+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-12-03 20:35+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <aleph@riseup.net>\n"
+"Language: english\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "profile_fields_title"
+msgstr "Usuari Mangopay"
+
+msgid "birthday"
+msgstr "Aniversari"
+
+msgid "birthday_description"
+msgstr "mm/aa/yyyy"
+
+msgid "nationality"
+msgstr "Nacionalitat"
+
+msgid "nationality_description"
+msgstr " "
+
+msgid "beneficiary_fields_title"
+msgstr "Liquidació Mangopay"
+
+msgid "BankAccountOwnerName"
+msgstr "Titular"
+
+msgid "BankAccountOwnerName_description"
+msgstr ""
+"(Nom del propietari del compte on es depositarà la quantitat recollida)"
+
+msgid "BankAccountOwnerAddress"
+msgstr "Adreça"
+
+msgid "BankAccountOwnerAddress_description"
+msgstr "(Adreça del titular bancari)"
+
+msgid "BankAccountIBAN"
+msgstr "IBAN"
+
+msgid "BankAccountIBAN_description"
+msgstr "(International Banck Account Number)"
+
+msgid "BankAccountBIC"
+msgstr "BIC"
+
+msgid "BankAccountBIC_description"
+msgstr "(Bank Identifier Code)"
+
+msgid "eur"
+msgstr "€"
+
+msgid "login_to_contribute"
+msgstr "Validat per aportar"
+
+msgid "contributions"
+msgstr "Donacions"
+
+msgid "contribute"
+msgstr "Dona"
+
+msgid "amount"
+msgstr "Quantitat: "
+
+msgid "post_fields_title"
+msgstr "Constribucions Mangopay"
+
+msgid "no_contributions"
+msgstr "No hi han contribucions."
+
+msgid "total"
+msgstr "Quantitat rebuda"
+
+msgid "withdraw"
+msgstr "Efectuar liquidació"
+
+msgid "must_fill_bankdata"
+msgstr ""
+"El propietari del post ha d'emplenar la secció 'Liquidació Mangopay' al seu "
+"perfil."
