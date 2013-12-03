@@ -5,18 +5,18 @@ Mangopay plugin for wordpress.
 
 Descripción 
 --------------
-Simple plugin para wordpress. pasarela de pago Mangopay. Apartir del SDKv2 (LeetchiWalletServicesPHP-master.zip)
+Simple plugin para wordpress. Pasarela de pago Mangopay. Apartir del SDKv2 (LeetchiWalletServicesPHP-master.zip)
 
 Acciones por ROL de USUARIO:
 --------------
 **Usuario >= author**
-- Colocar shortcodes de donación relacionados con posts.
-- Rellenar campos adicionales en profile, beneficiary.
-- Solicitar withdraw de lo recolectado por un post.
+- Colocar *shortcodes de contribución* relacionados con posts. Se crea una *wallet* en Mangopay por cada post con *shortcode*; siendo el autor del post el *usuario propietario* de la cartera virtual.
+- Rellenar campos adicionales en profile, *beneficiary*; el *usuario propietario* de la cartera debe rellenar estos campos para poder liquidar la recolecta.
+- Solicitar liquidación de lo recolectado por un post.
 
 **Usuario <= contributor**
-- Rellenar campos adicionales en profile, contributor.
-- Contribuir mediante calls al shortcode.
+- Rellenar campos adicionales en profile, *contributor*.
+- Contribuir mediante llamadas al *shortcode contribución*.
 
 Shortcodes:
 --------------
@@ -26,8 +26,8 @@ Shortcodes:
 
 ![alt tag](https://raw.github.com/aleph1888/mangopay_wp_plugin/master/images/contribute_shortcode_1.jpg)
 
-- View: Botón de contribuir; input text cantidad.
-- Params:
+- Vista: Botón de contribuir; input text cantidad.
+- Parámetros:
 	* Post_id => Si ausente, el contenedor del shortcode.
 	* Amount => Si ausente, se muestra un inputbox.
 
@@ -35,8 +35,8 @@ Shortcodes:
 
 ![alt tag](https://raw.github.com/aleph1888/mangopay_wp_plugin/master/images/raised_shortcode.jpg)
 
-- View: Total recogido por el proyecto. 
-- Params:
+- Vista: Literal informando del total recogido por el proyecto. 
+- Parámetros:
 	* Post_id => Si ausente, el contenedor del shortcode.
 
 Acciones:
