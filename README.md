@@ -13,6 +13,7 @@ Acciones por ROL de USUARIO:
 - Colocar shortcodes de donación relacionados con posts.
 - Rellenar campos adicionales en profile, beneficiary.
 - Solicitar withdraw de lo recolectado por un post.
+
 **Usuario <= contributor**
 - Rellenar campos adicionales en profile, contributor.
 - Contribuir mediante calls al shortcode.
@@ -27,8 +28,8 @@ Shortcodes:
 
 - View: Botón de contribuir; input text cantidad.
 - Params:
-* Post_id => Si ausente, el contenedor del shortcode.
-* Amount => Si ausente, se muestra un inputbox.
+	* Post_id => Si ausente, el contenedor del shortcode.
+	* Amount => Si ausente, se muestra un inputbox.
 
 **Shortcode recogido**: [mwp_raised post_id="88"] 
 
@@ -36,7 +37,7 @@ Shortcodes:
 
 - View: Total recogido por el proyecto. 
 - Params:
-* Post_id => Si ausente, el contenedor del shortcode.
+	* Post_id => Si ausente, el contenedor del shortcode.
 
 Acciones:
 --------------
