@@ -45,26 +45,26 @@ function mwp_show_contribute( $atts ) {
 		
 		//Choose template according to amount
 		if (isset($amount) && $amount > 0 ) {
-			$template = "mpw_contribute_shortcode.html";
+			$template = "/templates/mpw_contribute_shortcode.html";
 			$amount_caption = $amount . __( "eur", 'mangopay_wp_plugin');
 		} else {
-			$template = "mpw_contribute_shortcode_amount.html";
+			$template = "/templates/mpw_contribute_shortcode_amount.html";
 			$amount_caption = __( "amount", 'mangopay_wp_plugin');
 		}
 
 		//Call template
-		$path =  plugin_dir_url( __FILE__ ) . 'mangopay/';
+		$path =  plugin_dir_url( __FILE__ ) . '';
 		$output = file_get_contents($path . $template);
 		$output = str_replace ("%%title_caption",  __( "contributions", 'mangopay_wp_plugin'), $output);
 		$output = str_replace ("%%user_id",  $user->ID, $output);
 		$output = str_replace ("%%wallet_id",  $wallet_id, $output);
-		$output = str_replace ("%%action_url",  $path . 'mwp_contribute.php', $output);
+		$output = str_replace ("%%action_url",  $path . '/mangopay/mwp_contribute.php', $output);
 		$output = str_replace ("%%form_name",  "mwp_frm_contribute{$wallet_id}", $output);
 		$output = str_replace ("%%return_url", get_permalink($post_id), $output);
 		$output = str_replace ("%%amount_caption", $amount_caption, $output);
 		$output = str_replace ("%%amount",  $amount, $output);
 		$output = str_replace ("%%contribute_caption",  __( "contribute", 'mangopay_wp_plugin'), $output);
-		$output = str_replace ("%%template_url",  $path . "mwp_payment_skeleton.html", $output);
+		$output = str_replace ("%%template_url",  $path . "/templates/mwp_payment_skeleton.html", $output);
 	}
 	
 	return $output;
