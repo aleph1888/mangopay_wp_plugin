@@ -41,8 +41,8 @@ Shortcodes:
 
 Acciones:
 --------------
-- Rellenar campos adicionales en profile, beneficiary.
-- Rellenar campos adicionales en profile, contributor.
+- Rellenar campos adicionales en profile, *contributor*.
+- Rellenar campos adicionales en profile, *beneficiary*.
 
 ![alt tag](https://raw.github.com/aleph1888/mangopay_wp_plugin/master/images/Profile-fields.jpg)
 
