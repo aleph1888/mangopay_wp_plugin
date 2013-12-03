@@ -14,15 +14,20 @@ $can_perform_action = current_user_can ( 'delete_others_posts' );
 $can_perform_action = $can_perform_action || $user -> ID == $post -> post_author;
 $can_perform_action = $can_perform_action && $beneficiary_id && $wallet_id;
 
+//Get amount
+$wallet_id = get_post_meta($post_id, "wallet_id", 1);
+require_once (dirname(__FILE__) . "mangopay/lib/common.inc");
+$wallet = request("wallets/$wallet_id", "GET");
+$can_perform_action = $can_perform_action && ($wallet && $wallet -> Amount > 0);
+
 if ( !$can_perform_action ) {
 	wp_redirect( get_bloginfo('url'));
 }
 
-$amount = $_REQUEST['postid'];
 $body = json_encode(array(
 		"UserID" => $user -> ID, 
 		"WalletID" => $wallet_id, 
-		"Amount" => $amount, 
+		"Amount" => $wallet -> Amount, 
 		"BeneficiaryID" => $beneficiary_id
 	));
 
