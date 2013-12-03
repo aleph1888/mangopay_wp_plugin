@@ -10,7 +10,8 @@ $post = get_post ($post_id );
 $wallet_id = get_post_meta( "wallet_id", $post_id );
 $beneficiary_id = get_the_author_meta( "mangopay_beneficiary_id", $user->ID );
 
-$can_perform_action = $user -> ID == $post -> post_author;
+$can_perform_action = current_user_can ( 'delete_others_posts' );
+$can_perform_action = $can_perform_action || $user -> ID == $post -> post_author;
 $can_perform_action = $can_perform_action && $beneficiary_id && $wallet_id;
 
 if ( !$can_perform_action ) {
