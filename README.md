@@ -61,11 +61,11 @@ Instalación
 	* Openssl
 - Consigue la *frase de paso* de tu plataforma en Mangopay configurando y ejecutando *./client_creation.php*
 - Establece las credenciales en tu fichero de configuración Wordpress, *wp-config.php*.
-
+```
     /** Mangopay info  */
     define('M_client_id', '<ClientID>');
     define('M_password', '<password>');
     define('M_temp_path', '<temp_path>');
     define('M_base_path', 'https://api.sandbox.mangopay.com'); //o 'https://api.mangopay.com' para producción
-
+```
 
