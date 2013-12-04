@@ -5,7 +5,7 @@ Mangopay plugin for wordpress.
 
 Descripción 
 --------------
-Simple plugin para wordpress. Pasarela de pago Mangopay. Apartir del SDKv2 (LeetchiWalletServicesPHP-master.zip)
+Simple plugin para wordpress. Pasarela de pago Mangopay. Apartir del SDKv2 (https://github.com/MangoPay/mangopay2-php-sdk)
 
 Acciones por ROL de USUARIO:
 --------------
