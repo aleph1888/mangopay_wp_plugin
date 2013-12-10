@@ -8,30 +8,192 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-12-03 20:35+0100\n"
+"PO-Revision-Date: 2013-12-10 05:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <aleph@riseup.net>\n"
 "Language: english\n"
 "X-Generator: Poedit 1.5.4\n"
 
-msgid "profile_fields_title"
+# Generals
+msgid "back"
+msgstr "Tornar"
+
+# Errors
+msgid "mangopay_error"
+msgstr "ERROR MANGOPAY: "
+
+msgid "save_profile_error"
+msgstr "No s'ha pogut guardar: "
+
+msgid "mangopay_id_missing"
+msgstr ""
+"No tens MangoPay ID. Avançs de contribuir has d'emplenar la informació de "
+"l'usuari Mangopay al teu perfil."
+
+msgid "mangopay_author_id_missing"
+msgstr ""
+"El propietari del post no té MangoPay ID. Ha d'emplenar la informació de "
+"l'usuari Mangopay al seu perfil."
+
+msgid "missing_amount"
+msgstr "La quantitat de la contribució ha de ser més gran que 0."
+
+msgid "missing_wallet"
+msgstr "Falta informació de la bitlletera virtual."
+
+msgid "missing_card_data"
+msgstr "Falta informació de la targeta de crèdit."
+
+msgid "cannot_registrate_card"
+msgstr "ERROR MANGOPAY: no s'ha pogut registrar la targeta."
+
+# Profile
+msgid "mangopay_user_info"
 msgstr "Usuari Mangopay"
 
-msgid "birthday"
-msgstr "Aniversari"
+msgid "user_type"
+msgstr "Tipus d'usuari"
 
-msgid "birthday_description"
-msgstr "mm/aa/yyyy"
+msgid "user_type_description"
+msgstr " [_] Persona o [x] Entitat"
 
-msgid "nationality"
-msgstr "Nacionalitat"
+# Natural users
+msgid "mangopay_natural"
+msgstr "Persona"
 
-msgid "nationality_description"
+msgid "Email"
+msgstr " Correu electrònic"
+
+msgid "Email_description"
+msgstr " Per canviar aquest valor has de fer-ho al camp de dalt."
+
+msgid "FirstName"
+msgstr "Nom"
+
+msgid "FirstName_description"
 msgstr " "
 
-msgid "beneficiary_fields_title"
-msgstr "Liquidació Mangopay"
+msgid "LastName"
+msgstr "Cognoms"
 
+msgid "LastName_description"
+msgstr " "
+
+msgid "Birthday"
+msgstr "Aniversari"
+
+msgid "Birthday_description"
+msgstr "yyyy-mm-aa"
+
+msgid "Nationality"
+msgstr "Nacionalitat"
+
+msgid "Nationality_description"
+msgstr ""
+"ISO 3166-1 alpha-2 ES per Espanya, FR per França GB per Gran Bretanya..."
+
+msgid "CountryOfResidence"
+msgstr "Pais de residència"
+
+msgid "CountryOfResidence_description"
+msgstr ""
+"ISO 3166-1 alpha-2 ES per Espanya, FR per França GB per Gran Bretanya..."
+
+# Legal users
+msgid "mangopay_legal"
+msgstr "Entitat"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Name_description"
+msgstr "Nom de l'entitat"
+
+msgid "LegalPersonType"
+msgstr "Tipus d'entitat"
+
+msgid "LegalPersonType_description"
+msgstr "BUSINESS o ORGANIZATION"
+
+msgid "LegalRepresentativeFirstName"
+msgstr "Nom"
+
+msgid "LegalRepresentativeFirstName_description"
+msgstr "Nom del representant legal"
+
+msgid "LegalRepresentativeLastName"
+msgstr "Cognom"
+
+msgid "LegalRepresentativeLastName_description"
+msgstr "Cognom del representant legal"
+
+msgid "LegalRepresentativeBirthday"
+msgstr "Aniversari"
+
+msgid "LegalRepresentativeBirthday_description"
+msgstr "Aniversari del representant legal, yyyy-mm-aa"
+
+msgid "LegalRepresentativeNationality"
+msgstr "Nacionalitat"
+
+msgid "LegalRepresentativeNationality_description"
+msgstr ""
+"Nacionalitat del representat legal. ISO 3166-1 alpha-2 ES per Espanya, FR "
+"per França GB per Gran Bretanya..."
+
+msgid "LegalRepresentativeCountryOfResidence"
+msgstr "Pais de residència"
+
+msgid "LegalRepresentativeCountryOfResidence_description"
+msgstr ""
+"Pais de residència del representat legal. ISO 3166-1 alpha-2 ES per Espanya, "
+"FR per França GB per Gran Bretanya..."
+
+# Register card
+msgid "mangopay_cards"
+msgstr "Registra targeta de crèdit"
+
+msgid "cardNumber"
+msgstr "Nº"
+
+msgid "cardNumber_description"
+msgstr "Targetes de tipus CB VISA o MASTERCARD"
+
+msgid "cardDate"
+msgstr "Data de caducitat"
+
+msgid "cardDate_description"
+msgstr "MMYY"
+
+msgid "cardCvx"
+msgstr "CVX"
+
+msgid "cardCvx_description"
+msgstr "999"
+
+# Pay
+msgid "mangopay_pay"
+msgstr "Efectúa pagament."
+
+msgid "Alias"
+msgstr "Nº"
+
+msgid "Alias_description"
+msgstr "(enmascarat)"
+
+msgid "Amount"
+msgstr "Quantitat"
+
+msgid "Amount_description"
+msgstr " EUR "
+
+msgid "Post"
+msgstr "Destinatari"
+
+msgid "Post_description"
+msgstr "Receptor de la contribució"
+
+# Payment methods.
 msgid "BankAccountOwnerName"
 msgstr "Titular"
 

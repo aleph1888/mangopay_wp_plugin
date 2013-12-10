@@ -9,6 +9,7 @@
 add_shortcode( 'mwp_raised', 'mwp_show_raised' );
 
 function mwp_show_raised( $atts ) {
+
 	//Get params
 	extract( shortcode_atts( array(
 		'post_id' => '0'
@@ -21,17 +22,18 @@ function mwp_show_raised( $atts ) {
 	}
 	
 	//Search for wallet
-	$wallet_id = get_post_meta($post-> ID, "wallet_id", 1);
-	if ($wallet_id) {
-		require_once (dirname(__FILE__) . "/mangopay/lib/common.inc");
-		$wallet = request("wallets/$wallet_id", "GET");
+	$wallet_id = get_post_meta( $post_id, "wallet_id", 1);
+	if ( $wallet_id ) {
+		require_once __DIR__ . "/includes/mwp_api.inc";
+		$api = mwp_get_api();
+		$wallet = $api->Wallets->Get($wallet_id);
 	}
 
 	//Display info
-	if (!$wallet || $wallet -> Amount == 0) {
+	if ( ! $wallet || $wallet->Balance->Amount == 0) {
 		$output = __( "no_contributions", 'mangopay_wp_plugin');
 	} else {
-		$output = "<div><label for='amount'>" . __( "total", 'mangopay_wp_plugin' ) . ": " . $wallet -> Amount . __( "eur", 'mangopay_wp_plugin' ) . "</label></div>";
+		$output = "<div><label for='amount'>" . __( "total", 'mangopay_wp_plugin' ) . ": " . $wallet->Balance->Amount / 100 . __( "eur", 'mangopay_wp_plugin' ) . "</label></div>";
 	}
 	return $output;
 

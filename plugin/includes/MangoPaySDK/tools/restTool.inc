@@ -85,11 +85,12 @@ class RestTool {
      * @return object Respons data
      */
     public function Request($urlMethod, $requestType, $requestData = null, & $pagination = null, $additionalUrlParams = null) {
-        
+       
         $this->_requestType = $requestType;
         $this->_requestData = $requestData;
         
         $this->BuildRequest($urlMethod, $pagination, $additionalUrlParams);
+         
         $responseResult = $this->RunRequest();
         
         if(!is_null($pagination)){
@@ -107,7 +108,7 @@ class RestTool {
     private function RunRequest() {
 
         $result = curl_exec($this->_curlHandle);
-       
+        
         if ($result === false && curl_errno($this->_curlHandle) != 0)
             throw new Exception('cURL error: ' . curl_error($this->_curlHandle));
 

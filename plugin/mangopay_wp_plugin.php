@@ -7,24 +7,43 @@ Version: 0.1
 Author: Hackafou
 Author URI: http://www.coopfunding.net
 Text Domain: mangopay_wp_plugin
-Domain Path: /language/
+Domain Path: /languages/
 */
 
-//Language
-include (dirname(__FILE__) . "/mangopay_wp_plugin_languages.php");
+add_action( 'init', 'mwp_init' );
 
-//Profile fields
-include (dirname(__FILE__) . "/mangopay_wp_plugin_profile_fields.php");
+function mwp_init() {
+	 wp_register_style( 'mwp_sc_contribute_css', plugins_url('templates/mwp_sc_contribute.css', __FILE__) );
+	 wp_register_script ( "mwp_sc_contribute_js", plugins_url( 'templates/mwp_sc_contribute.js', __FILE__ ) , array( 'jquery' ) );
 
-//Withdraw metabox in post edition sidebar
-include (dirname(__FILE__) . "/mangopay_wp_plugin_post_fields.php");
+	//Language
+	load_plugin_textdomain( 'mangopay_wp_plugin', false, dirname(plugin_basename(__FILE__)) . '/languages/' );
 
-//Contribute Shortcode
-include (dirname(__FILE__) . "/mangopay_wp_plugin_contribute_shortcode.php");
+	//Configuration of Mangopay in profile. This is, minimum for users that are autors of posts. This user will owner the wallet.
+	include (__DIR__ . "/mwp_profile.php");
 
-//Raised Shorcode
-include (dirname(__FILE__) . "/mangopay_wp_plugin_raised_shortcode.php");
+	//Contribute Shortcode
+	include (__DIR__ . "/mwp_sc_contribute.php");
 
+	//Raised Shorcode
+	include (__DIR__ . "/mwp_sc_raised.php");
 
+	//Withdraw metabox in post edition sidebar
+	//include (__DIR__ . "/mangopay_wp_plugin_post_fields.php");
 
+}
+
+add_action('init', 'myStartSession', 1);
+add_action('wp_logout', 'myEndSession');
+add_action('wp_login', 'myEndSession');
+
+function myStartSession() {
+	if(!session_id()) {
+		session_start();
+	}
+}
+
+function myEndSession() {
+	session_destroy ();
+}
 

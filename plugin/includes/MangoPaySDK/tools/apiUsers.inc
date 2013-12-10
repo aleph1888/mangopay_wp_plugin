@@ -22,6 +22,7 @@ class ApiUsers extends ApiBase {
             throw new Exception('Wrong entity class for user');
         
         $response = $this->CreateObject($methodKey, $user);
+
         return $this->GetUserResponse($response);
     }
     
@@ -212,7 +213,7 @@ class ApiUsers extends ApiBase {
      * @throws \MangoPay\Exception If occur unexpected response from API 
      */
     private function GetUserResponse($response) {
-        
+
         if (isset($response->PersonType)) {
             
             switch ($response->PersonType) {

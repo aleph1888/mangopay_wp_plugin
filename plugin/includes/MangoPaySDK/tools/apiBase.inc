@@ -168,8 +168,9 @@ abstract class ApiBase {
             $requestData = $this->BuildRequestData($entity);
 
         $rest = new RestTool(true, $this->_root);
+
         $response = $rest->Request($urlMethod, $this->GetRequestType($methodKey), $requestData);
-        
+      
         if (!is_null($responseClassName))
             return $this->CastResponseToEntity($response, $responseClassName);
         
@@ -241,7 +242,7 @@ abstract class ApiBase {
         
         $rest = new RestTool(true, $this->_root);
         $response = $rest->Request($urlMethod, $this->GetRequestType($methodKey), $requestData);
-        
+
         if (!is_null($responseClassName))
             return $this->CastResponseToEntity($response, $responseClassName);
         

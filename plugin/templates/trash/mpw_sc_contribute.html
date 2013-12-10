@@ -1,0 +1,103 @@
+<section class="PaylineForm">
+	<h3>Usuari Mangopay</h3>
+	<label>Mangopay ID: []</label>
+	<table class='form-table'>
+		<tr>
+			<th><label>Tipus d'usuari</label></th>
+			<td><input name='user_type' type='checkbox'  class='user_type' /><span class='description'> [_] Persona o [x] Entitat</span></td>
+		</tr>
+	</table>
+
+	<div class='mangopay_natural' style='display:inline'>
+		<a name='mangopay_natural'></a>
+		<h4>Persona</h4>
+		<table class='form-table'>
+			<tr>
+				<th><label> Correu electrònic</label></th>
+				<td><input type='text' id='Email' name='Email' value='' class='regular-text'>&nbsp;<span class='description'> </span></td>
+			</tr>
+			<tr>
+				<th><label>Nom</label></th>
+				<td><input type='text' id='FirstName' name='FirstName' value='' class='regular-text'>&nbsp;<span class='description'> </span></td>
+			</tr>
+			<tr>
+				<th><label>Cognoms</label></th>
+				<td><input type='text' id='LastName' name='LastName' value='' class='regular-text'>&nbsp;<span class='description'> </span></td>
+			</tr>
+			<tr>
+				<th><label>Aniversari</label></th>
+				<td><input type='text' id='Birthday' name='Birthday' value='' class='regular-text'>&nbsp;<span class='description'>yyyy-mm-aa</span></td>
+			</tr>
+			<tr>
+				<th><label>Nacionalitat</label></th>
+				<td><input type='text' id='Nationality' name='Nationality' value='' class='regular-text'>&nbsp;<span class='description'>ISO 3166-1 alpha-2 ES per Espanya, FR per França GB per Gran Bretanya...</span></td>
+			</tr>
+			<tr>
+				<th><label>Pais de residència</label></th>
+				<td><input type='text' id='CountryOfResidence' name='CountryOfResidence' value='' class='regular-text'>&nbsp;<span class='description'>ISO 3166-1 alpha-2 ES per Espanya, FR per França GB per Gran Bretanya...</span></td>
+			</tr>
+		</table>
+	</div>
+	<div class='mangopay_legal' style='display:none'>
+		<a name='mangopay_legal'></a>
+		<h4>Entitat</h4>
+		<table class='form-table'>
+			<tr>
+				<th><label> Correu electrònic</label></th>
+				<td><input type='text' id='Email' name='Email' value='' class='regular-text'>&nbsp;<span class='description'> </span></td>
+			</tr>
+			<tr>
+				<th><label>Nom</label></th>
+				<td><input type='text' id='Name' name='Name' value='' class='regular-text'>&nbsp;<span class='description'>Nom de l'entitat</span></td>
+			</tr>
+			<tr>
+				<th><label>Tipus d'entitat</label></th>
+				<td><input type='text' id='LegalPersonType' name='LegalPersonType' value='' class='regular-text'>&nbsp;<span class='description'>BUSINESS o ORGANIZATION</span></td>
+			</tr>
+			<tr>
+				<th><label>Nom</label></th>
+				<td><input type='text' id='LegalRepresentativeFirstName' name='LegalRepresentativeFirstName' value='' class='regular-text'>&nbsp;<span class='description'>Nom del representant legal</span></td>
+			</tr>
+			<tr>
+				<th><label>Cognom</label></th>
+				<td><input type='text' id='LegalRepresentativeLastName' name='LegalRepresentativeLastName' value='' class='regular-text'>&nbsp;<span class='description'>Cognom del representant legal</span></td>
+			</tr>
+			<tr>
+				<th><label>Aniversari</label></th>
+				<td><input type='text' id='LegalRepresentativeBirthday' name='LegalRepresentativeBirthday' value='' class='regular-text'>&nbsp;<span class='description'>Aniversari del representant legal, yyyy-mm-aa</span></td>
+			</tr>
+			<tr>
+				<th><label>Nacionalitat</label></th>
+				<td><input type='text' id='LegalRepresentativeNationality' name='LegalRepresentativeNationality' value='' class='regular-text'>&nbsp;<span class='description'>Nacionalitat del representat legal. ISO 3166-1 alpha-2 ES per Espanya, FR per França GB per Gran Bretanya...</span></td>
+			</tr>
+			<tr>
+				<th><label>Pais de residència</label></th>
+				<td><input type='text' id='LegalRepresentativeCountryOfResidence' name='LegalRepresentativeCountryOfResidence' value='' class='regular-text'>&nbsp;<span class='description'>Pais de residència del representat legal. ISO 3166-1 alpha-2 ES per Espanya, FR per França GB per Gran Bretanya...</span></td>
+			</tr>
+		</table>
+	</div>
+
+
+
+	<div class='mangopay_pay' style='display:none'>
+		<a name='mangopay_pay'></a>
+		<h4>Efectúa pagament.</h4>
+		<table class='form-table'>
+			<tr>
+				<th><label>Nº</label>
+		</th>
+				<td><input type='text' id='Alias' name='Alias' value='' class='regular-text'>&nbsp;<span class='description'>(enmascarat)</span></td>
+			</tr>
+			<tr>
+				<th><label>Quantitat</label>
+		</th>
+				<td><input type='text' id='Amount' name='Amount' value='' class='regular-text'>&nbsp;<span class='description'> EUR </span></td>
+			</tr>
+			<tr>
+				<th><label>Destinatari</label>
+		</th>
+				<td><input type='text' id='Post' name='Post' value='' class='regular-text'>&nbsp;<span class='description'>Receptor de la contribució</span></td>
+			</tr>
+		</table>
+	</div>
+</section>
