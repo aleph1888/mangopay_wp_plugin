@@ -29,7 +29,7 @@ function mwp_init() {
 	include (__DIR__ . "/mwp_sc_raised.php");
 
 	//Withdraw metabox in post edition sidebar
-	//include (__DIR__ . "/mangopay_wp_plugin_post_fields.php");
+	include (__DIR__ . "/mwp_post.php");
 
 }
 

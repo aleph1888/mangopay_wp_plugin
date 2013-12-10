@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-12-10 05:30+0100\n"
+"PO-Revision-Date: 2013-12-10 08:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <aleph@riseup.net>\n"
 "Language: english\n"
@@ -17,6 +17,9 @@ msgstr ""
 # Generals
 msgid "back"
 msgstr "Tornar"
+
+msgid "bt_pay"
+msgstr "Pagar"
 
 # Errors
 msgid "mangopay_error"
@@ -193,32 +196,51 @@ msgstr "Destinatari"
 msgid "Post_description"
 msgstr "Receptor de la contribució"
 
-# Payment methods.
-msgid "BankAccountOwnerName"
+# Payout
+msgid "mangopay_bank"
+msgstr "Compte bancari (per reintegrar les donacions)"
+
+msgid "OwnerName"
 msgstr "Titular"
 
-msgid "BankAccountOwnerName_description"
-msgstr ""
-"(Nom del propietari del compte on es depositarà la quantitat recollida)"
+msgid "OwnerName_description"
+msgstr "Nom del propietari del compte on es depositarà la quantitat recollida"
 
-msgid "BankAccountOwnerAddress"
+msgid "OwnerAddress"
 msgstr "Adreça"
 
-msgid "BankAccountOwnerAddress_description"
-msgstr "(Adreça del titular bancari)"
+msgid "OwnerAddress_description"
+msgstr "Adreça del titular bancari"
 
-msgid "BankAccountIBAN"
+msgid "IBAN"
 msgstr "IBAN"
 
-msgid "BankAccountIBAN_description"
-msgstr "(International Banck Account Number)"
+msgid "IBAN_description"
+msgstr "International Banck Account Number"
 
-msgid "BankAccountBIC"
+msgid "BIC"
 msgstr "BIC"
 
-msgid "BankAccountBIC_description"
-msgstr "(Bank Identifier Code)"
+msgid "BIC_description"
+msgstr "Bank Identifier Code"
 
+msgid "post_fields_title"
+msgstr "Contribucions Mangopay"
+
+msgid "no_contributions"
+msgstr "No hi han contribucions."
+
+msgid "total"
+msgstr "Quantitat rebuda"
+
+msgid "withdraw"
+msgstr "Efectuar liquidació"
+
+msgid "must_fill_bankdata"
+msgstr ""
+"El propietari del post ha de registrar un compte al seu perfil per fer el reintegrament."
+
+# otros
 msgid "eur"
 msgstr "€"
 
@@ -234,19 +256,5 @@ msgstr "Dona"
 msgid "amount"
 msgstr "Quantitat: "
 
-msgid "post_fields_title"
-msgstr "Constribucions Mangopay"
 
-msgid "no_contributions"
-msgstr "No hi han contribucions."
 
-msgid "total"
-msgstr "Quantitat rebuda"
-
-msgid "withdraw"
-msgstr "Efectuar liquidació"
-
-msgid "must_fill_bankdata"
-msgstr ""
-"El propietari del post ha d'emplenar la secció 'Liquidació Mangopay' al seu "
-"perfil."

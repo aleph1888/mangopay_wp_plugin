@@ -6,7 +6,7 @@
 		public $wallet_id;
 		public $card_registration;
 		public $card;
-		public $user;
+		public $user_id;
 
 		public $payIn;
 
@@ -24,23 +24,24 @@
 				foreach ($e->GetErrorDetails() -> Errors as $error) {
 					$output .= $error . " ";
 				}
+	
 				//See: mangopay_wp_plugin_errors.php
-				$_SESSION["MWP_API_ERROR"] .= $source . __( "mangopay_error", 'mangopay_wp_plugin') . $output; 
+				$_SESSION["MWP_API_ERROR"] .= "[{$source}] " . __( "mangopay_error", 'mangopay_wp_plugin') . " [{$output}]"; 
 			} else {
-				$_SESSION["MWP_API_ERROR"] .= $source . $e->GetMessage();
+				$_SESSION["MWP_API_ERROR"] .= "[{$source}]" . $e->GetMessage();
 			}
 			return;
 		}
 
 		private function po_get_fields ( $type ) {
-			require_once ( __DIR__ . '/mwp_fields.inc');
+			require_once ( __DIR__ . '/includes/mwp_fields.inc');
 			return mwp_get_fields ( $yFields );
 		}
 
 		public function mwp_new_user () {
 			$user = new mwp_user;
-			$this -> user = $user -> mwp_save();
-			return $this -> user;
+			$this -> user_id = $user -> mwp_save();
+			return $this -> user_id;
 		}
 
 		private function po_default_values () {
@@ -82,7 +83,7 @@
 
 			try {
 				$cardRegister = new \MangoPay\CardRegistration();
-				$cardRegister->UserId = $this -> user -> Id;
+				$cardRegister->UserId = $this -> user_id;
 				$cardRegister->Currency = 'EUR';
 				$cardRegister->CardType = 'VISA';
 				$createdCardRegister = $this->api->CardRegistrations->Create($cardRegister);
@@ -161,19 +162,20 @@
 		}
 
 		public function mwp_payIn ( $amount, $fees ) {
-			$amount = $amount * 100;
-			try {
+				//Parse amount to cents
+				$amount = $amount * 100;
+
 				// create pay-in CARD DIRECT
 				$payIn = new \MangoPay\PayIn();
 				$payIn->CreditedWalletId = $this->wallet_id;
-				$payIn->AuthorId = $this->user->Id;
+				$payIn->AuthorId = $this->user_id;
 				$payIn->DebitedFunds = new \MangoPay\Money();
 				$payIn->DebitedFunds->Amount = $amount;
 				$payIn->DebitedFunds->Currency = 'EUR';
 				$payIn->Fees = new \MangoPay\Money();
 				$payIn->Fees->Amount = $fees;
 				$payIn->Fees->Currency = 'EUR';
-
+			try {
 				// payment type as CARD
 				$payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
 				if ($this->card->CardType == 'CB' || $this->card->CardType == 'VISA' || $this->card->CardType == 'MASTERCARD')

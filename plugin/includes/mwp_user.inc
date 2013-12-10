@@ -97,7 +97,6 @@
 
 		}
 
-		
 		//Parse date to strtotime() seconds from Unix Epoch.
 		private function user_convert_dates_to_number ( &$user, $is_legal_user ) {
 

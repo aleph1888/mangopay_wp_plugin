@@ -20,8 +20,8 @@ function mwp_show_profile_fields( $user ) {
 
 	//Show form
 	require_once ( __DIR__ . "/includes/mwp_forms.inc");
-	$forms = new mwp_forms;
-	echo  $forms -> mwp_show_user_section( $user );
+	echo  mwp_forms::mwp_show_user_section( $user );
+	echo  mwp_forms::mwp_show_bank_section( $user );
 
 }
 
@@ -42,11 +42,11 @@ function mwp_save_profile_fields( $user_id ) {
 	require_once ( __DIR__ . '/includes/mwp_fields.inc');
 	$yFields = mwp_get_fields ( ( $is_legal_user ? "legal" : "natural" ) );
 
-	//Save if need
-	if ( $has_changed = mwp_has_changed_fields( $yFields, get_userdata( $user_id ) ) ) {
-		//Get user
-		$user = get_userdata ( $user_id );
+	//Get user
+	$user = get_userdata ( $user_id );
 
+	//Save if need
+	if ( mwp_has_changed_fields( $yFields, $user ) ) {
 		//Update all fields
 		foreach ($yFields as $field) 
 			update_user_meta( $user_id, $field, $_POST["mwp_{$field}"] );
@@ -58,10 +58,25 @@ function mwp_save_profile_fields( $user_id ) {
 
 		//Only save Mangopay ID in Wordpress user if it is new and has created one
 		if ( $new_mangopay_id ) 
-			update_user_meta( $user_id, 'mangopay_id', $user_mangopay -> Id);
+			update_user_meta( $user_id, 'mangopay_id', $new_mangopay_id);
 
 		//Update type of user
 		update_user_meta( $user_id, 'is_legal_user', $is_legal_user );
+	}
+
+	$yFields = mwp_get_fields ( 'bank' );	
+	if ( mwp_has_changed_fields( $yFields, $user ) ) {
+		//Update all fields
+		foreach ($yFields as $field) 
+			update_user_meta( $user_id, $field, $_POST["mwp_{$field}"] );
+
+		//Save mangopay bankaccount
+		require_once ( __DIR__ . "/includes/mwp_payout.inc");
+		$payout_mangopay = new mwp_payout;
+		$new_bank_id = $payout_mangopay -> mwp_bankaccount_save ( $user );
+		if ( $new_bank_id ) 
+			update_user_meta( $user_id, 'bank_id', $new_bank_id);
+		
 	}
 
 }

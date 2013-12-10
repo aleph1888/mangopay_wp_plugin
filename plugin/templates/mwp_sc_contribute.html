@@ -1,26 +1,11 @@
-<!-- 
-Needs to be replaced %%vars:
-	title_caption
-	form_name
-	action_url
-	amount
-	contribute_caption
-	user_id
-	return_url
-	template_url
--->
-
 <div id="div%%form_name" class="wrap">
 	<h2>%%title_caption</h2>
 	<form name="%%form_name" id="%%form_name" action="%%action_url" method="post">
 		<p>
-			<input type="hidden" name="amount" id="Amount" value="%%amount" size="7" />
+			<input type="hidden" name="amount" id="amount" value="%%amount" size="7" />
 			<input type="hidden" name="post_id" id="post_id" value="%%post_id" size="7" />
-			<input type="button" class="wp-submit" id="wp-submit" value="%%contribute_caption %%amount_caption" />
-			<input type="hidden" class= "action_url" value="%%action_url" />
+			<input type="submit" name="wp-submit" id="wp-submit" value="%%contribute_caption %%amount_caption" />
+			
 		</p>
-	</form>
-	<form name="%%form_name_Pay" id="%%form_name_Pay" action="%%action_url" method="post">
-		<div class="payForm" style="display:none">%%payForm</div>
-	</form>
+	</form>	
 </div>

@@ -16,6 +16,8 @@
 			case "pay":
 				$yFields = array ("Alias", "Amount", "Post");
 				break;
+			case "bank":
+				$yFields = array ("OwnerName", "OwnerAddress", "IBAN", "BIC" );
 		}
 		return $yFields;
 	}

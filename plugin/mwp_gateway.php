@@ -11,14 +11,14 @@ require_once $ABSPATH . "/wp-load.php";
 
 //Error display function
 function mwp_error_redirect ( $message ) {
-	return _e( $message, 'mangopay_wp_plugin') . $_SESSION["MWP_API_ERROR"];
+	return _e( $message, 'mangopay_wp_plugin') . " " . $_SESSION["MWP_API_ERROR"];
 
 }
 
 //Main process function
 function mwp_process_contribution () {
 
-	require_once ( __DIR__ . "/mwp_pay.inc");
+	require_once ( __DIR__ . "/includes/mwp_pay.inc");
 	$po = new mwp_pay;
 
 	//Verify amount
@@ -60,7 +60,17 @@ function mwp_process_contribution () {
 
 }
 
+//Show data
+	_wp_admin_bar_init();
+	get_header();
+?>
+	<div style="margin: 0 auto; width:900px; height:500px">
+		<p><?php echo mwp_process_contribution(); ?></p>
+		<a href="<?php echo get_permalink ( $_POST['mwp_post_id' ] ) ?>"><?php _e( 'back', 'mangopay_wp_plugin'); ?></a>
+	</div>
+<?php
+get_sidebar();
+get_footer(); 
 ?>
 
-<p><?php echo mwp_process_contribution(); ?></p>
-<a href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><?php _e( 'back', 'mangopay_wp_plugin'); ?></a>
+
