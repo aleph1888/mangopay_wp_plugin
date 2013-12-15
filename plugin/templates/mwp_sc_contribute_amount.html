@@ -1,12 +1,12 @@
-<div id="div%%form_name" class="wrap">
+<div id="div%%div_name" class="wrap">
 	<h2>%%title_caption</h2>
-	<form name="%%form_name" id="%%form_name" action="%%action_url" method="post">
-		<p>
-			<label for="amount">%%amount_caption</label>
-			<input type="text" name="amount" id="amount" class="input" value="%%amount" size="7" />
-			<input type="hidden" name="post_id" id="post_id" value="%%post_id" size="7" />
-			<input type="submit" name="wp-submit" id="wp-submit" value="%%contribute_caption" />
-			
-		</p>
-	</form>	
+	<form name="%%form_name" id="%%form_name" action="%%action_url" method="get">
+	%%login
+	<p>
+		<label for="amount">%%amount_caption</label>
+		<input type="text" name="mwp_Amount"  class="mwp_Amount" value="%%amount" size="7" />
+		<input type="hidden" name="mwp_post_id" class="mwp_post_id" value="%%post_id" size="7" />
+		<input type="submit" value = "%%contribute_caption" />
+	</p>
+	</form>
 </div>

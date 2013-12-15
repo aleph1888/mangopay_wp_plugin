@@ -10,11 +10,11 @@ session_start();
 
 	$wallet_id = get_post_meta( $post_id, "wallet_id", 1);
 	require_once __DIR__ . "/includes/mwp_api.inc";
-	$api = mwp_get_api();
-	$wallet = $api->Wallets->Get($wallet_id);
+	
+	$wallet = mwp\mwp_api::get_instance()->Wallets->Get($wallet_id);
 
 	require_once __DIR__ . "/includes/mwp_payout.inc";
-	$payout = new mwp_payout;
+	$payout = new mwp\mwp_payout;
 
 	$_SESSION["payout_result"] = $payout -> mwp_do_payout ( 
 				$user -> mangopay_id, 

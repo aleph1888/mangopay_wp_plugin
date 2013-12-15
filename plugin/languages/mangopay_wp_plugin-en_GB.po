@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-12-10 08:03+0100\n"
+"PO-Revision-Date: 2013-12-15 03:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <aleph@riseup.net>\n"
 "Language: english\n"
@@ -21,6 +21,12 @@ msgstr "Tornar"
 msgid "bt_pay"
 msgstr "Pagar"
 
+msgid "login"
+msgstr " Logeja't"
+
+msgid "register"
+msgstr "Registra't (no es imprescindible, peró millor si ho fas!)"
+
 # Errors
 msgid "mangopay_error"
 msgstr "ERROR MANGOPAY: "
@@ -29,9 +35,7 @@ msgid "save_profile_error"
 msgstr "No s'ha pogut guardar: "
 
 msgid "mangopay_id_missing"
-msgstr ""
-"No tens MangoPay ID. Avançs de contribuir has d'emplenar la informació de "
-"l'usuari Mangopay al teu perfil."
+msgstr "Errors a les dades personals o entitat."
 
 msgid "mangopay_author_id_missing"
 msgstr ""
@@ -50,7 +54,7 @@ msgstr "Falta informació de la targeta de crèdit."
 msgid "cannot_registrate_card"
 msgstr "ERROR MANGOPAY: no s'ha pogut registrar la targeta."
 
-# Profile
+# Users
 msgid "mangopay_user_info"
 msgstr "Usuari Mangopay"
 
@@ -60,6 +64,9 @@ msgstr "Tipus d'usuari"
 msgid "user_type_description"
 msgstr " [_] Persona o [x] Entitat"
 
+msgid "bt_change_user_data"
+msgstr "Canvia les dades del teu usuari"
+
 # Natural users
 msgid "mangopay_natural"
 msgstr "Persona"
@@ -68,7 +75,7 @@ msgid "Email"
 msgstr " Correu electrònic"
 
 msgid "Email_description"
-msgstr " Per canviar aquest valor has de fer-ho al camp de dalt."
+msgstr " "
 
 msgid "FirstName"
 msgstr "Nom"
@@ -179,10 +186,10 @@ msgid "mangopay_pay"
 msgstr "Efectúa pagament."
 
 msgid "Alias"
-msgstr "Nº"
+msgstr "Nº de targeta"
 
 msgid "Alias_description"
-msgstr "(enmascarat)"
+msgstr " Nosaltres no guardem les dades de la targeta; les guarda MangoPay."
 
 msgid "Amount"
 msgstr "Quantitat"
@@ -196,6 +203,9 @@ msgstr "Destinatari"
 msgid "Post_description"
 msgstr "Receptor de la contribució"
 
+msgid "bt_register_card"
+msgstr "Registra nova targeta"
+
 # Payout
 msgid "mangopay_bank"
 msgstr "Compte bancari (per reintegrar les donacions)"
@@ -204,7 +214,7 @@ msgid "OwnerName"
 msgstr "Titular"
 
 msgid "OwnerName_description"
-msgstr "Nom del propietari del compte on es depositarà la quantitat recollida"
+msgstr "Nom del propietari del compte on es depositarà la quantitat recollida."
 
 msgid "OwnerAddress"
 msgstr "Adreça"
@@ -238,14 +248,15 @@ msgstr "Efectuar liquidació"
 
 msgid "must_fill_bankdata"
 msgstr ""
-"El propietari del post ha de registrar un compte al seu perfil per fer el reintegrament."
+"El propietari del post ha de registrar un compte al seu perfil per fer el "
+"reintegrament."
+
+msgid "CREATED"
+msgstr "S'ha cursat la petició."
 
 # otros
 msgid "eur"
 msgstr "€"
-
-msgid "login_to_contribute"
-msgstr "Validat per aportar"
 
 msgid "contributions"
 msgstr "Donacions"
@@ -255,6 +266,3 @@ msgstr "Dona"
 
 msgid "amount"
 msgstr "Quantitat: "
-
-
-

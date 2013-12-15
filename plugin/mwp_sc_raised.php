@@ -9,7 +9,6 @@
 add_shortcode( 'mwp_raised', 'mwp_show_raised' );
 
 function mwp_show_raised( $atts ) {
-
 	//Get params
 	extract( shortcode_atts( array(
 		'post_id' => '0'
@@ -24,9 +23,9 @@ function mwp_show_raised( $atts ) {
 	//Search for wallet
 	$wallet_id = get_post_meta( $post_id, "wallet_id", 1);
 	if ( $wallet_id ) {
-		require_once __DIR__ . "/includes/mwp_api.inc";
-		$api = mwp_get_api();
-		$wallet = $api->Wallets->Get($wallet_id);
+		$wallet = mwp\mwp_api::get_instance()->Wallets->Get($wallet_id);
+
+		//$transaction_list = $api->Wallets->GetTransactions (walletId, & $pagination = null, $filter = null )
 	}
 
 	//Display info

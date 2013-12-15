@@ -28,25 +28,6 @@ function mwp_show_contribute( $atts ) {
 		return;
 	}
 
-	$user = wp_get_current_user();
-	
-	//Contribute data url parms
-	$url_params = "&post_id={$post_id}&amount={$amount}";
-
-	//(A) Is logged
-	if ( $user -> ID == 0 ) {
-		$contribute_url =  site_url() . '/wp-admin/profile.php?mwp_action=user_data{$url_params}#mangopay_user' ;
-		$action_url = site_url() . "/wp-login.php?action=register&redirecto_to={$contribute_url}";
-	}
-
-	//(B) Has payed before
-	if ( !$action_url && !$user -> mangopay_id ) 
-		$action_url = site_url() . "/wp-admin/profile.php?mwp_action=user_data{$url_params}#mangopay_user";
-
-	//(C) Has ward
-	if ( !$action_url && !$user -> registered_cards ) 
-		$action_url = site_url() . "/wp-admin/profile.php?mwp_action=register{$url_params}#mangopay_cards";
-
 	//Choose template according to amount
 	if (isset($amount) && $amount > 0 ) {
 		$template = "mwp_sc_contribute.html";
@@ -64,12 +45,14 @@ function mwp_show_contribute( $atts ) {
 				"action_url" => plugin_dir_url(__FILE__) . "mwp_payform.php",
 				"post_id" => $post_id,
 				"contribute_caption" => __( "contribute", 'mangopay_wp_plugin'),
+				"id_name" => 'form' .  substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5),
+				"login" => mwp\mwp_forms::mwp_show_wordpress_login()
 	);
 
 	$output .= file_get_contents( $template_url );
 	foreach ($yTemplate as $key => $value) 
 		$output = str_replace ( "%%{$key}", $value, $output );
-
+	
 	return $output;
 
 }

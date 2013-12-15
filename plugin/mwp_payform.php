@@ -1,23 +1,15 @@
 <?php
 /**
 * 
-* Manage Mangopay user section in profile:
+* One step payform to Mangopay
 *
-*	SHOW section 
-*	SAVE section
-* 	FUNCTIONS section 
 **/
 
-/** SHOW section **/
-
-//add_action( 'show_user_profile', 'mwp_show_profile_fields' );
-//add_action( 'edit_user_profile', 'mwp_show_profile_fields' );
-
 require_once( dirname(dirname(dirname(__DIR__))). '/wp-load.php' );
-
 mwp_forms_init ();
 
 function mwp_forms_init () {
+
 	_wp_admin_bar_init();
 	get_header();
 	mwp_show_forms();
@@ -28,33 +20,25 @@ function mwp_forms_init () {
 
 function mwp_show_forms () {
 
-	wp_enqueue_script ( "mwp_sc_contribute_js" );
-
-	require_once ( __DIR__ . "/includes/mwp_forms.inc");
-
 	require_once ( __DIR__ . "/includes/mwp_pay.inc");
-	$po = new mwp_pay;
+	$po = new mwp\mwp_pay ( wp_get_current_user () );
+
 	$output .= '<div style="margin: 0 auto; width:900px">';
 	$output .= "<form name='frmContribute' action='mwp_gateway.php' method='POST'>";
+		
+		//Ask for register (if user don't, we don't keep information, but do the process)
+		$output .= mwp\mwp_forms::mwp_show_wordpress_login();
+
 		//Display user data
-		$output .= mwp_forms::mwp_show_user_section( $po );
+		$output .= mwp\mwp_forms::mwp_show_user_section( $po->user, ! $po->user->mangopay_id );
 
 		//Cards and paymentDirect
-		$output .= mwp_forms::mwp_show_payment_section( $po );
+		$output .= mwp\mwp_forms::mwp_show_payment_section( $po, ! $po->user->card_id );
 		
-		$output .=  "<input type='hidden' name ='mwp_post_id' value='{$_POST['post_id']}'>";
+		$output .=  "<input type='hidden' name ='mwp_post_id' value='{$_REQUEST['mwp_post_id']}'>";
 	$output .= "</form>";
 	$output .= "</div>";
 	echo $output;
 
 }
-
-
-
-
-
-
-
-
-
 

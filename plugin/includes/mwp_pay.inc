@@ -1,75 +1,54 @@
 <?php
+namespace mwp;
+
+use MangoPay as m;
+
 	class mwp_pay {
 
 		private $api;
+
+		public $user;
 		
 		public $wallet_id;
 		public $card_registration;
 		public $card;
-		public $user_id;
+		public $Alias;
+
+		public $Amount;
+		public $Post; // Title
 
 		public $payIn;
 
-		public function __construct() {
-			//Get SDK interface
-			require_once __DIR__ . "/mwp_api.inc";
-			$this -> api = mwp_get_api();
+		//If $autosave_user then, will read post params to create a user
+		public function __construct( $user, $autosave_user = false ) {
+			$this->api = mwp_api::get_instance();
 
-			require_once __DIR__ . "/mwp_user.inc";
-			$this -> po_default_values ();
-		}
+			$this -> user = new mwp_user ( $user, $autosave_user );
 
-		private function po_manage_api_error ( $e, $details, $source ) {
-			if ( $details ) {
-				foreach ($e->GetErrorDetails() -> Errors as $error) {
-					$output .= $error . " ";
-				}
-	
-				//See: mangopay_wp_plugin_errors.php
-				$_SESSION["MWP_API_ERROR"] .= "[{$source}] " . __( "mangopay_error", 'mangopay_wp_plugin') . " [{$output}]"; 
-			} else {
-				$_SESSION["MWP_API_ERROR"] .= "[{$source}]" . $e->GetMessage();
-			}
-			return;
-		}
-
-		private function po_get_fields ( $type ) {
-			require_once ( __DIR__ . '/includes/mwp_fields.inc');
-			return mwp_get_fields ( $yFields );
-		}
-
-		public function mwp_new_user () {
-			$user = new mwp_user;
-			$this -> user_id = $user -> mwp_save();
-			return $this -> user_id;
+			self::po_default_values ();
 		}
 
 		private function po_default_values () {
 
-			//User section
-			if ( $user = wp_get_current_user() ) {
-				$this -> Email = $user -> user_email;
-				$this-> FirstName = $user -> user_firstname;
-				$this -> LastName = $user -> user_lastname;
+			$this -> Alias = '--';
+			if ( $this->user->card_id ) {
+				try {
+					$this -> card = $this->api->Cards->Get($this->user->card_id);
+					$this -> Alias = $this -> card -> Alias;
+				} catch (m\ResponseException $e) {
+					mwp_errors::mwp_manage_api_error ($e, true, 'mwp_payIn');
+
+				} catch (m\Exception $e) {
+					mwp_errors::mwp_manage_api_error ($e, false, 'mwp_payIn');
+				}
 			}
 
-			$this -> Nationality = 'ES';
-			$this -> CountryOfResidence = 'ES';
-
-			$this -> LegalRepresentativeNationality = 'ES';
-			$this -> LegalRepresentativeCountryOfResidence = 'ES';
-
-			$this -> LegalRepresentativeNationality = 'ES';
-			$this -> LegalRepresentativeCountryOfResidence = 'ES';
-			
-			//Just while coding ¡¡remove!!
-			$this -> Birthday = "1950-01-01";
 			$this -> cardNumber = "4970101122334406";
 			$this -> cardDate = "1220";
 			$this -> cardCvx = "123";
-			//Pay section
-			$this -> Amount = $_POST['amount'];
-			$this -> Post = get_the_title( $_POST['post_id'] );
+
+			$this -> Amount = $_REQUEST['mwp_Amount'];
+			$this -> Post = get_the_title( $_REQUEST['mwp_post_id'] );
 		}
 
 		public function mwp_preregister_card () {
@@ -82,18 +61,17 @@
 				return null;
 
 			try {
-				$cardRegister = new \MangoPay\CardRegistration();
-				$cardRegister->UserId = $this -> user_id;
+				$cardRegister = new m\CardRegistration();
+				$cardRegister->UserId = $this->user->mangopay_id;
 				$cardRegister->Currency = 'EUR';
-				$cardRegister->CardType = 'VISA';
+				$cardRegister->CardType = 'CB_VISA_MASTERCARD';
 				$createdCardRegister = $this->api->CardRegistrations->Create($cardRegister);
 
-			} catch (MangoPay\ResponseException $e) {
-				$this -> po_manage_api_error ($e, true, 'mwp_preregister_card');
+			} catch (m\ResponseException $e) {
+				mwp_errors::mwp_manage_api_error ($e, true, 'mwp_preregister_card');
 				return;
-
-			} catch (MangoPay\Exception $e) {
-				$this -> po_manage_api_error ($e, false, 'mwp_preregister_card');
+			} catch (m\Exception $e) {
+				mwp_errors::mwp_manage_api_error ($e, false, 'mwp_preregister_card');
 				return;
 			}
 
@@ -106,33 +84,41 @@
 				'cardNumber' => $cardNumber,
 				'cardExpirationDate'=> $cardDate,
 				'cardCvx' => $cardCvx,
-				'return_url' => plugin_dir_url (__FILE__) . '/mwp_payment.php'
+				'return_url' => plugin_dir_url (__FILE__) . 'mwp_payment.php'
 			);
 			return $data;
+
 		}
 
 		public function mwp_validate_card ( $data ) {
-			
+
 			try {
 				$cardRegister = $this->api->CardRegistrations->Get($this->card_registration->Id);
 				$cardRegister->RegistrationData = $data;
 				$updatedCardRegister = $this->api->CardRegistrations->Update($cardRegister);
 
 				if ($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)) {
-					$_SESSION["MWP_API_ERROR"] = 'Cannot create virtual card. Payment has not been created.';
+					$_SESSION["MWP_API_ERROR"] = 'Cannot create virtual card. Payment has not been created. Card status ' . $updatedCardRegister->Status;
 					return;
 				}
 
 				$this->card = $this->api->Cards->Get($updatedCardRegister->CardId);
 
+				$this -> user -> card_id = $this->card->Id;
+
+				//If we are doing payment with know user, save id.
+				if ( $this -> wp_id )
+					update_user_meta( $this -> wp_id, 'card_id', $this->card->Id );
+
 				return true;
 
-			} catch (MangoPay\ResponseException $e) {
-				$this -> po_manage_api_error ($e, true, 'mwp_validate_card');
+			} catch (m\ResponseException $e) {
+				mwp_errors::mwp_manage_api_error ($e, true, 'mwp_validate_card');
 
-			} catch (MangoPay\Exception $e) {
-				$this -> po_manage_api_error ($e, false, 'mwp_validate_card');
+			} catch (m\Exception $e) {
+				mwp_errors::mwp_manage_api_error ($e, false, 'mwp_validate_card');
 			}
+
 		}
 
 		public function mwp_wallet_for_post ( $post_id ) {
@@ -143,49 +129,49 @@
 				if ( $post -> wallet_id )
 					$wallet = $this->api->Wallets->Get( $post -> wallet_id );
 				else {
-					$wallet = new \MangoPay\Wallet();
+					$wallet = new m\Wallet();
 					$wallet->Owners = array( $user -> mangopay_id );
 					$wallet->Currency = 'EUR';
 					$wallet->Description = 'Temporary wallet for payment demo';
 					$wallet = $this->api->Wallets->Create($wallet);
 					update_post_meta( $post_id, 'wallet_id', $wallet -> Id );
 				}
-			} catch (MangoPay\ResponseException $e) {
-				$this -> po_manage_api_error ($e, true, 'mwp_wallet_for_post');
+			} catch (m\ResponseException $e) {
+				mwp_errors::mwp_manage_api_error ($e, true, 'mwp_wallet_for_post');
 
-			} catch (MangoPay\Exception $e) {
-				$this -> po_manage_api_error ($e, false, 'mwp_wallet_for_post');
+			} catch (m\Exception $e) {
+				mwp_errors::mwp_manage_api_error ($e, false, 'mwp_wallet_for_post');
 			}
 
 			if ( $wallet ) 
 				$this -> wallet_id = $wallet->Id;
+
 		}
 
 		public function mwp_payIn ( $amount, $fees ) {
-				//Parse amount to cents
-				$amount = $amount * 100;
 
-				// create pay-in CARD DIRECT
-				$payIn = new \MangoPay\PayIn();
-				$payIn->CreditedWalletId = $this->wallet_id;
-				$payIn->AuthorId = $this->user_id;
-				$payIn->DebitedFunds = new \MangoPay\Money();
-				$payIn->DebitedFunds->Amount = $amount;
-				$payIn->DebitedFunds->Currency = 'EUR';
-				$payIn->Fees = new \MangoPay\Money();
-				$payIn->Fees->Amount = $fees;
-				$payIn->Fees->Currency = 'EUR';
+			//Parse amount to cents
+			$amount = $amount * 100;
+
+			// create pay-in CARD DIRECT
+			$payIn = new m\PayIn();
+			$payIn->CreditedWalletId = $this->wallet_id;
+			$payIn->AuthorId = $this->user->mangopay_id;
+			$payIn->DebitedFunds = new m\Money();
+			$payIn->DebitedFunds->Amount = $amount;
+			$payIn->DebitedFunds->Currency = 'EUR';
+			$payIn->Fees = new m\Money();
+			$payIn->Fees->Amount = $fees;
+			$payIn->Fees->Currency = 'EUR';
+
 			try {
 				// payment type as CARD
-				$payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
-				if ($this->card->CardType == 'CB' || $this->card->CardType == 'VISA' || $this->card->CardType == 'MASTERCARD')
-					$payIn->PaymentDetails->CardType = 'CB_VISA_MASTERCARD';
-				elseif ($card->CardType == 'AMEX')
-					$payIn->PaymentDetails->CardType = 'AMEX';
-
+				$payIn->PaymentDetails = new m\PayInPaymentDetailsCard();
+				$payIn->PaymentDetails->CardType = 'CB_VISA_MASTERCARD';
+			
 				// execution type as DIRECT
-				$payIn->ExecutionDetails = new \MangoPay\PayInExecutionDetailsDirect();
-				$payIn->ExecutionDetails->CardId = $this->card->Id;
+				$payIn->ExecutionDetails = new m\PayInExecutionDetailsDirect();
+				$payIn->ExecutionDetails->CardId = $this->user->card_id;
 				$payIn->ExecutionDetails->SecureModeReturnURL = get_bloginfo('url');
 
 				// create Pay-In
@@ -207,11 +193,11 @@
 						.'</div>';
 				}
 
-			} catch (MangoPay\ResponseException $e) {
-				$this -> po_manage_api_error ($e, true, 'mwp_payIn');
+			} catch (m\ResponseException $e) {
+				mwp_errors::mwp_manage_api_error ($e, true, 'mwp_payIn');
 
-			} catch (MangoPay\Exception $e) {
-				$this -> po_manage_api_error ($e, false, 'mwp_payIn');
+			} catch (m\Exception $e) {
+				mwp_errors::mwp_manage_api_error ($e, false, 'mwp_payIn');
 			}
 			
 			if ( $payIn )

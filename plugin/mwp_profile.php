@@ -20,8 +20,8 @@ function mwp_show_profile_fields( $user ) {
 
 	//Show form
 	require_once ( __DIR__ . "/includes/mwp_forms.inc");
-	echo  mwp_forms::mwp_show_user_section( $user );
-	echo  mwp_forms::mwp_show_bank_section( $user );
+	echo mwp\mwp_forms::mwp_show_user_section( $user );
+	echo mwp\mwp_forms::mwp_show_bank_section( $user );
 
 }
 
@@ -39,7 +39,6 @@ function mwp_save_profile_fields( $user_id ) {
 	$is_legal_user = ( $_POST["user_type"] == "on" );
 
 	//Get a list of field names switching on type of user
-	require_once ( __DIR__ . '/includes/mwp_fields.inc');
 	$yFields = mwp_get_fields ( ( $is_legal_user ? "legal" : "natural" ) );
 
 	//Get user
@@ -52,47 +51,26 @@ function mwp_save_profile_fields( $user_id ) {
 			update_user_meta( $user_id, $field, $_POST["mwp_{$field}"] );
 
 		//Save mangopay user
-		require_once ( __DIR__ . "/includes/mwp_user.inc");
-		$user_mangopay = new mwp_user;
-		$new_mangopay_id = $user_mangopay -> mwp_save ( $user );
-
-		//Only save Mangopay ID in Wordpress user if it is new and has created one
-		if ( $new_mangopay_id ) 
-			update_user_meta( $user_id, 'mangopay_id', $new_mangopay_id);
+		mwp\mpw_user::mwp_save_user ( $user );
 
 		//Update type of user
 		update_user_meta( $user_id, 'is_legal_user', $is_legal_user );
 	}
 
-	$yFields = mwp_get_fields ( 'bank' );	
+	$yFields = mwp_get_fields ( 'bank' );
 	if ( mwp_has_changed_fields( $yFields, $user ) ) {
 		//Update all fields
 		foreach ($yFields as $field) 
 			update_user_meta( $user_id, $field, $_POST["mwp_{$field}"] );
 
 		//Save mangopay bankaccount
-		require_once ( __DIR__ . "/includes/mwp_payout.inc");
-		$payout_mangopay = new mwp_payout;
-		$new_bank_id = $payout_mangopay -> mwp_bankaccount_save ( $user );
-		if ( $new_bank_id ) 
-			update_user_meta( $user_id, 'bank_id', $new_bank_id);
-		
+		mwp\mwp_bank::mwp_save_bank ( $user );
 	}
 
 }
 
 /** FUNCTIONS **/
-//Return true or false wether any of the specified fields has change between post and object
-function mwp_has_changed_fields ( $yFields, $user ) {
 
-	foreach ( $yFields as $field ) {
-		$has_changed = ( $_POST["mwp_{$field}"] != $user -> $field );
-		if ( $has_changed )
-			return true;
-	}
-	return false;
-
-}
 
 //Show messages on profile box
 //Catch some Titles with gettext filter to show error messages

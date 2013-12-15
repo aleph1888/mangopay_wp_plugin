@@ -13,6 +13,14 @@ Domain Path: /languages/
 add_action( 'init', 'mwp_init' );
 
 function mwp_init() {
+
+	require_once __DIR__ . "/includes/mwp_api.inc";
+	require_once __DIR__ . "/includes/mwp_user.inc";
+	require_once __DIR__ . "/includes/mwp_user.inc";
+	require_once __DIR__ . "/includes/mwp_bank.inc";
+	require_once __DIR__ . "/includes/mwp_fields.inc";
+	require_once __DIR__ . "/includes/mwp_forms.inc";
+
 	 wp_register_style( 'mwp_sc_contribute_css', plugins_url('templates/mwp_sc_contribute.css', __FILE__) );
 	 wp_register_script ( "mwp_sc_contribute_js", plugins_url( 'templates/mwp_sc_contribute.js', __FILE__ ) , array( 'jquery' ) );
 

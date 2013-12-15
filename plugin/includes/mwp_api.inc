@@ -10,21 +10,36 @@
 *		define('MWP_base_path', 'https://api.sandbox.mangopay.com');
 **/
 
-
-
-function mwp_get_api () {
+namespace mwp;
+	include 'MangoPaySDK/mangoPayApi.inc';
 	$ABSPATH = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
 	require_once $ABSPATH . "/wp-load.php";
-	
-	require_once __DIR__ . "/MangoPaySDK/mangoPayApi.inc";
-	$api = new MangoPay\MangoPayApi();
+	require_once __DIR__ . "/mwp_errors.inc";
 
-	$api->Config->ClientId = MWP_client_id;
-	$api->Config->ClientPassword = MWP_password;
-	$api->Config->TemporaryFolder = MWP_temp_path;
-	$api->Config->BaseUrl = MWP_base_path;
+use MangoPay as m;
 
-	return $api;
+class mwp_api extends m\MangoPayApi {
+
+	static private $instance;
+
+	public static function get_instance( $s = null) {
+
+		$_SESSION["MWP_API_ERROR"] = null;
+
+		if ( self::$instance == null ) {
+
+			self::$instance = new mwp_api;
+
+			self::$instance->Config->ClientId = MWP_client_id;
+			self::$instance->Config->ClientPassword = MWP_password;
+			self::$instance->Config->TemporaryFolder = MWP_temp_path;
+			self::$instance->Config->BaseUrl = MWP_base_path;
+
+		}
+
+		return self::$instance;
+
+	}
 
 }
 
