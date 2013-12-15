@@ -35,6 +35,8 @@ function mwp_show_forms () {
 		//Cards and paymentDirect
 		$output .= mwp\mwp_forms::mwp_show_payment_section( $po, ! $po->user->card_id );
 		
+		$output .= mwp_print_link ("<img src='templates/mango.png'><br> Condicions generals", "http://www.mangopay.com/wp-content/blogs.dir/10/files/2013/11/CGU-API-MANGOPAY-MAI-2013_ESP.pdf");
+
 		$output .=  "<input type='hidden' name ='mwp_post_id' value='{$_REQUEST['mwp_post_id']}'>";
 	$output .= "</form>";
 	$output .= "</div>";
