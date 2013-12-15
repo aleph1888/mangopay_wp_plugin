@@ -24,12 +24,13 @@ function mwp_get_fields ( $type ) {
 }
 
 //Return true or false wether any of the specified fields has change between post and object
-function mwp_has_changed_fields ( $yFields, $user ) {
+function mwp_has_changed_fields ( $yFields, $entity ) {
 	foreach ( $yFields as $field ) {
-		$has_changed = ( $_POST["mwp_{$field}"] != $user -> $field );
+		$has_changed = ( $_POST["mwp_{$field}"] != $entity -> $field );
 		if ( $has_changed )
 			return true;
 	}
+
 	return false;
 }
 

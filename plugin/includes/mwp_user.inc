@@ -48,9 +48,9 @@ use MangoPay as m;
 		public function mwp_default_values( $wp_user ) {
 
 			if ( $wp_user ) {
-				$this -> Email = $user -> user_email;
-				$this-> FirstName = $user -> user_firstname;
-				$this -> LastName = $user -> user_lastname;
+				$this -> Email = $wp_user -> user_email;
+				$this-> FirstName = $wp_user -> user_firstname;
+				$this -> LastName = $wp_user -> user_lastname;
 			}
 
 			$iso_code = substr ( get_locale(),  3, 2 );
@@ -70,6 +70,7 @@ use MangoPay as m;
 				$yFields =  mwp_get_fields ( ($this -> is_legal_user ? 'Legal' : 'Natural') );
 				foreach ( $yFields as $field )
 					$this -> $field = $mango_user -> $field;
+				self::user_convert_number_to_dates ( $this, $this -> is_legal_user );
 			}
 
 		}
@@ -115,7 +116,9 @@ use MangoPay as m;
 				} else {
 					$result_user = $api -> Users -> Create ( $mangopay_user );
 					$user -> mangopay_id = $result_user -> Id;
+					update_user_meta( $user->wp_id, 'mangopay_id', $result_user -> Id );
 				}
+
 				return $result_user;
 
 			} catch (m\ResponseException $e) {
@@ -135,6 +138,16 @@ use MangoPay as m;
 				$user -> Birthday = strtotime ( $user -> Birthday );
 			}
 
+		}
+
+		//Inverse parse date to strtotime() seconds from Unix Epoch.
+		function user_convert_number_to_dates ( &$user, $is_legal_user ) {
+
+			if ( $is_legal_user ) {
+				$user -> LegalRepresentativeBirthday = date ("Y-m-d", $user -> LegalRepresentativeBirthday );
+			} else {
+				$user -> Birthday = date ("Y-m-d",  $user -> Birthday );
+			}
 		}
 
 	}

@@ -16,40 +16,6 @@ use MangoPay as m;
 
 		}
 
-		//Returns Bankaccount only inf new
-		public function mwp_bankaccount_save ( $user = null ) {
-
-			//Cannot save for non mangopay users
-			if ( ! $user -> mangopay_id )
-				return null;
-
-			//Get fields names switching on user type
-			$yFields = mwp_get_fields ( 'bank' );
-
-
-				//New object
-				$bankAccount = new m\BankAccount();
-				$bankAccount -> UserId = $user -> mangopay_id;
-				$bankAccount -> Type = 'IBAN';
-
-				//Fill data
-				foreach ( $yFields as $field ) 
-					$bankAccount -> $field = $_POST["mwp_{$field}"];
-
-			try {
-				$bankResult = $this -> api -> Users -> CreateBankAccount ( $user -> mangopay_id, $bankAccount );
-				return $bankResult -> Id;
-
-			} catch (m\ResponseException $e) {
-				mwp_errors::mwp_manage_api_error ($e, true, 'mwp_payout.save');
-
-			} catch (m\Exception $e) {
-				mwp_errors::mwp_manage_api_error ($e, false, 'mwp_payOut.save');
-			}
-
-		}
-
-		//Returns Bankaccount only inf new
 		public function mwp_bankaccount_get_info ( $user_id ) {
 
 			$user = get_userdata ( $user_id );

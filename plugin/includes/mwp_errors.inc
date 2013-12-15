@@ -16,6 +16,13 @@ namespace mwp;
 			return;
 		}
 
+		static public function mwp_manage_error ( $message, $source ) {
+
+			$_SESSION["MWP_API_ERROR"] .= "[{$source}] {$message}<br><b>\n";
+			
+			return;
+		}
+
 
 	}
 

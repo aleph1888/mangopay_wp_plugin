@@ -97,18 +97,16 @@ use MangoPay as m;
 				$cardRegister->RegistrationData = $data;
 				$updatedCardRegister = $this->api->CardRegistrations->Update($cardRegister);
 
-				if ($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)) {
-					$_SESSION["MWP_API_ERROR"] = 'Cannot create virtual card. Payment has not been created. Card status ' . $updatedCardRegister->Status;
-					return;
-				}
+				if ($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)) 
+					return mwp_errors::mwp_manage_error ('Cannot create virtual card. Payment has not been created. Card status ' . $updatedCardRegister->Status);
 
 				$this->card = $this->api->Cards->Get($updatedCardRegister->CardId);
 
 				$this -> user -> card_id = $this->card->Id;
 
 				//If we are doing payment with know user, save id.
-				if ( $this -> wp_id )
-					update_user_meta( $this -> wp_id, 'card_id', $this->card->Id );
+				if ( $this -> user -> wp_id )
+					update_user_meta( $this -> user -> wp_id, 'card_id', $this->card->Id );
 
 				return true;
 

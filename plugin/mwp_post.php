@@ -30,7 +30,7 @@ function print_meta_box ( $post ) {
 		_e( "no_contributions", 'mangopay_wp_plugin');
 	} else {
 		
-		//Total		
+		//Total
 		echo __( "<h2>" . 'Total: ', 'mangopay_wp_plugin') . 
 			 $wallet->Balance->Amount / 100 .
 			 __( 'eur', 'mangopay_wp_plugin') . "</h2>\n";
