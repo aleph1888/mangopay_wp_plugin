@@ -69,3 +69,9 @@ Instalación
     define('M_base_path', 'https://api.sandbox.mangopay.com'); //o 'https://api.mangopay.com' para producción
 ```
 
+Contribuye
+--------------
+@BTC 1DNxbBeExzv7JvXgL6Up5BSUvuY4gE8q4A
+
+
+Contri
