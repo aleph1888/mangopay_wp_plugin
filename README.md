@@ -63,10 +63,10 @@ Instalación
 - Establece las credenciales en tu fichero de configuración Wordpress, *wp-config.php*.
 ```
     /** Mangopay info  */
-    define('M_client_id', '<ClientID>');
-    define('M_password', '<password>');
-    define('M_temp_path', '<temp_path>');
-    define('M_base_path', 'https://api.sandbox.mangopay.com'); //o 'https://api.mangopay.com' para producción
+    define('MWP_client_id', '<ClientID>');
+    define('MWP_password', '<password>');
+    define('MWP_temp_path', '<temp_path>');
+    define('MWP_base_path', 'https://api.sandbox.mangopay.com'); //o 'https://api.mangopay.com' para producción
 ```
 
 Contribuye
