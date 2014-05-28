@@ -1,0 +1,267 @@
+# Copyright (C) 2013 WordPress
+# This file is distributed under the same license as the WordPress package.
+msgid ""
+msgstr ""
+"Project-Id-Version: mangopay_wp_plugin 0.1\n"
+"Report-Msgid-Bugs-To: ox@enredaos.net\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-12-15 03:35+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <ox@enredaos.net>\n"
+"Language: catalan\n"
+"X-Generator: Poedit 1.5.4\n"
+
+# Generals
+msgid "back"
+msgstr "Tornar"
+
+msgid "bt_pay"
+msgstr "Pagar"
+
+msgid "login"
+msgstr " Logeja't"
+
+msgid "register"
+msgstr "Registra't (no es imprescindible, peró millor si ho fas!)"
+
+# Errors
+msgid "mangopay_error"
+msgstr "ERROR MANGOPAY: "
+
+msgid "save_profile_error"
+msgstr "No s'ha pogut guardar: "
+
+msgid "mangopay_id_missing"
+msgstr "Errors a les dades personals o entitat."
+
+msgid "mangopay_author_id_missing"
+msgstr ""
+"El propietari del post no té MangoPay ID. Ha d'emplenar la informació de "
+"l'usuari Mangopay al seu perfil."
+
+msgid "missing_amount"
+msgstr "La quantitat de la contribució ha de ser més gran que 0."
+
+msgid "missing_wallet"
+msgstr "Falta informació de la bitlletera virtual."
+
+msgid "missing_card_data"
+msgstr "Falta informació de la targeta de crèdit."
+
+msgid "cannot_registrate_card"
+msgstr "ERROR MANGOPAY: no s'ha pogut registrar la targeta."
+
+# Users
+msgid "mangopay_user_info"
+msgstr "Usuari Mangopay"
+
+msgid "user_type"
+msgstr "Tipus d'usuari"
+
+msgid "user_type_description"
+msgstr " [_] Persona o [x] Entitat"
+
+msgid "bt_change_user_data"
+msgstr "Canvia les dades del teu usuari"
+
+# Natural users
+msgid "mangopay_natural"
+msgstr "Persona"
+
+msgid "Email"
+msgstr " Correu electrònic"
+
+msgid "Email_description"
+msgstr " "
+
+msgid "FirstName"
+msgstr "Nom"
+
+msgid "FirstName_description"
+msgstr " "
+
+msgid "LastName"
+msgstr "Cognoms"
+
+msgid "LastName_description"
+msgstr " "
+
+msgid "Birthday"
+msgstr "Aniversari"
+
+msgid "Birthday_description"
+msgstr "yyyy-mm-aa"
+
+msgid "Nationality"
+msgstr "Nacionalitat"
+
+msgid "Nationality_description"
+msgstr ""
+"ISO 3166-1 alpha-2 ES per Espanya, FR per França GB per Gran Bretanya..."
+
+msgid "CountryOfResidence"
+msgstr "Pais de residència"
+
+msgid "CountryOfResidence_description"
+msgstr ""
+"ISO 3166-1 alpha-2 ES per Espanya, FR per França GB per Gran Bretanya..."
+
+# Legal users
+msgid "mangopay_legal"
+msgstr "Entitat"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Name_description"
+msgstr "Nom de l'entitat"
+
+msgid "LegalPersonType"
+msgstr "Tipus d'entitat"
+
+msgid "LegalPersonType_description"
+msgstr "BUSINESS o ORGANIZATION"
+
+msgid "LegalRepresentativeFirstName"
+msgstr "Nom"
+
+msgid "LegalRepresentativeFirstName_description"
+msgstr "Nom del representant legal"
+
+msgid "LegalRepresentativeLastName"
+msgstr "Cognom"
+
+msgid "LegalRepresentativeLastName_description"
+msgstr "Cognom del representant legal"
+
+msgid "LegalRepresentativeBirthday"
+msgstr "Aniversari"
+
+msgid "LegalRepresentativeBirthday_description"
+msgstr "Aniversari del representant legal, yyyy-mm-aa"
+
+msgid "LegalRepresentativeNationality"
+msgstr "Nacionalitat"
+
+msgid "LegalRepresentativeNationality_description"
+msgstr ""
+"Nacionalitat del representat legal. ISO 3166-1 alpha-2 ES per Espanya, FR "
+"per França GB per Gran Bretanya..."
+
+msgid "LegalRepresentativeCountryOfResidence"
+msgstr "Pais de residència"
+
+msgid "LegalRepresentativeCountryOfResidence_description"
+msgstr ""
+"Pais de residència del representat legal. ISO 3166-1 alpha-2 ES per Espanya, "
+"FR per França GB per Gran Bretanya..."
+
+# Register card
+msgid "mangopay_cards"
+msgstr "Registra targeta de crèdit"
+
+msgid "cardNumber"
+msgstr "Nº"
+
+msgid "cardNumber_description"
+msgstr "Targetes de tipus CB VISA o MASTERCARD"
+
+msgid "cardDate"
+msgstr "Data de caducitat"
+
+msgid "cardDate_description"
+msgstr "MMYY"
+
+msgid "cardCvx"
+msgstr "CVX"
+
+msgid "cardCvx_description"
+msgstr "999"
+
+# Pay
+msgid "mangopay_pay"
+msgstr "Efectúa pagament."
+
+msgid "Alias"
+msgstr "Nº de targeta"
+
+msgid "Alias_description"
+msgstr " Nosaltres no guardem les dades de la targeta; les guarda MangoPay."
+
+msgid "Amount"
+msgstr "Quantitat"
+
+msgid "Amount_description"
+msgstr " EUR "
+
+msgid "Post"
+msgstr "Destinatari"
+
+msgid "Post_description"
+msgstr "Receptor de la contribució"
+
+msgid "bt_register_card"
+msgstr "Registra nova targeta"
+
+# Payout
+msgid "mangopay_bank"
+msgstr "Compte bancari (per reintegrar les donacions)"
+
+msgid "OwnerName"
+msgstr "Titular"
+
+msgid "OwnerName_description"
+msgstr "Nom del propietari del compte on es depositarà la quantitat recollida."
+
+msgid "OwnerAddress"
+msgstr "Adreça"
+
+msgid "OwnerAddress_description"
+msgstr "Adreça del titular bancari"
+
+msgid "IBAN"
+msgstr "IBAN"
+
+msgid "IBAN_description"
+msgstr "International Banck Account Number"
+
+msgid "BIC"
+msgstr "BIC"
+
+msgid "BIC_description"
+msgstr "Bank Identifier Code"
+
+msgid "post_fields_title"
+msgstr "Contribucions Mangopay"
+
+msgid "no_contributions"
+msgstr "No hi han contribucions."
+
+msgid "total"
+msgstr "Quantitat rebuda"
+
+msgid "withdraw"
+msgstr "Efectuar liquidació"
+
+msgid "must_fill_bankdata"
+msgstr ""
+"El propietari del post ha de registrar un compte al seu perfil per fer el "
+"reintegrament."
+
+msgid "CREATED"
+msgstr "S'ha cursat la petició."
+
+# otros
+msgid "eur"
+msgstr "€"
+
+msgid "contributions"
+msgstr "Donacions"
+
+msgid "contribute"
+msgstr "Dona"
+
+msgid "amount"
+msgstr "Quantitat: "
